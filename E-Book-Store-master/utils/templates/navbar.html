@@ -1,0 +1,78 @@
+<body>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=Playfair+Display:ital,wght@0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/style.css">
+  <div class="background">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-myshop" href="/">E Book Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="navbar-products" href="/" id="products">Products <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="navbar-brands" href="#" id="navbarDropdown-brands" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Authors
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{url_for('home')}}">all</a>
+                {% for brand in brands %}
+                <a class="dropdown-item" href="{{url_for('get_brand', id=brand.id)}}">{{brand.name}}</a>
+                {% endfor %}
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="navbarDropdown-category" href="#" id="navbarDropdown-category" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categories
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{url_for('home')}}">all</a>
+                {% for category in categories %}
+                <a class="dropdown-item" href="{{url_for('get_category',id=category.id)}}">{{category.name}}</a>
+                {% endfor %}
+              </div>
+            </li>
+            <li class="nav-item">
+              <form class="form-inline" action="{{url_for('result')}}">
+                <input class="form-control mr-sm-2 se" type="search" placeholder="Search" aria-label="Search" name="q">
+                <button class="btn btn-primary my-2 my-sm-0 sb" type="submit">Search</button>
+              </form>
+            </li>
+            {% if current_user.is_authenticated %}
+            <li class="nav-item">
+              <a href="{{url_for('myorders')}}" class="nav-link-username">{{current_user.name}}</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{url_for('customer_logout')}}" class="nav-link-logout"> Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a href="{{url_for('customer_register')}}" class="nav-link-sign-in">Sign in</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{url_for('customerLogin')}}" class="nav-link-login">login</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+              <a href="{{url_for('getCart')}}" class="nav-link-cart"> Cart ({{ session['Shoppingcart']|length }}) </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{url_for('myorders')}}" class="nav-link-myorders"> my orders </a>
+            </li>
+          </ul>
+          <!-- result and search code here -->
+        </div>
+      </nav>
+    </div>
+  </div>
+</body>
+<!---============== END OF NAV BAR ==================-->

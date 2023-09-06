@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=Playfair+Display:ital,wght@0,800;1,400&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="../static/css/style.css">
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <br>
+            <div class="text-center bg-info p-2 h4">Admin Login Page</div>
+            {% from "_formhelpers.html" import render_field %}
+            {% include '_messages.html' %}
+            <form method=post enctype="multipart/form-data">
+                <div>
+                    {{ render_field(form.email, class="form-control") }}
+                    {{ render_field(form.password, class="form-control") }}
+                </div>
+                <p><input type="submit" value="Login" class="btn-info"></p>
+                <p><h5>Don't have an account? <a class="slinks" href="{{url_for('register')}}">Signup/register</a></h5></p>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+{% endblock content %}

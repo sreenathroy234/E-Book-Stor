@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="container mt-4">
+    {% include '_messages.html' %}
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            Customer name: {{customer.name}}
+            <br>
+            Customer email: {{customer.email}}
+            <br>
+            Customer contact: {{customer.contact}}
+            <br>
+            <br>
+            <table class="table table-sm">
+                <thead>
+                    <th>Name</th>
+                </thead>
+                <tbody>
+                    {% for orders in orders %}
+                    {% for key, product in orders.orders.items() %}
+                    {% if product.name not in list %}
+                    {{ list.append(product.name) }}
+                    <tr>
+                        <td>{{product.name}}<br>
+                        <iframe src="{{product.link}}" width="700" height="500" allow="autoplay"></iframe>
+                            <form action="{{url_for('AddCart')}}" method="post"></td>
+                    </tr>
+                  
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
